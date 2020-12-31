@@ -1,7 +1,7 @@
 import os
 import csv
 csvpath = os.path.join('Resources', 'budget_data.csv')
-
+output_path = os.path.join('Analysis', 'budget_data.txt')
 print("Financial Analysis") 
 print("--------------------")
 
@@ -14,11 +14,12 @@ Max_value=0
 Min_value=0
 Max_change_date=''
 Min_change_date=''
+writerow=[]
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     next(csvreader)
     for row in csvreader:
-        #total_month += 1 
+        #total_month = total_month + 1 
         total_month.append(row[0])
         Net_profit.append(int(row[1]))
         net_total =+ int(row[1])
@@ -41,3 +42,6 @@ print('Total:',sum(Net_profit))
 print('Average Change:',round((change_profit/(counter-1)),2))
 print(Max_value, Max_change_date)
 print(Min_value, Min_change_date)
+
+with open(output_path,"w") as txt_file:
+    txt_file.writerow(f'Financial Analysis', '-----------------','Total Months : {str(len(total_month))}', 'Total:,sum(Net_profit))','Average Change:,round((change_profit/(counter-1)),2))', 'Max_value, Max_change_date)', 'Min_value, Min_change_date)' )
