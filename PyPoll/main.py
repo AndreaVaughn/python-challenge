@@ -1,6 +1,6 @@
 import os
 import csv
-csvpath = os.path.join('Resources', 'election_data.csv')
+csvpath = os.path.join('..','Resources', 'election_data.csv')
 print('Election Results')
 print('----------------')
 
@@ -10,8 +10,8 @@ with open(csvpath) as csvfile:
 
     candidate=[]
     vote_count=[]
-    total_votes=0
     Percent_votes =[]
+    total_votes=0
     for row in csvreader:
         total_votes += 1
 
@@ -35,6 +35,16 @@ with open(csvpath) as csvfile:
   
     print("Total Votes:", str(total_votes))
     for i in range(len(candidate)):
-        #print(candidate[i], Percent_votes[i], vote_count[i])
         print(f"{candidate[i]}: {str(Percent_votes[i])} ({str(vote_count[i])})")
+        #print(candidate[i], Percent_votes[i], vote_count[i])
     print("Winner:", (winning_candidate))
+
+output_file = os.path.join('..', 'Analysis', 'Analysis.txt')
+
+with open(output_file, "w", newline='') as txt_file:
+    txt_file.write('Election Results\n')
+    txt_file.write('---------------------\n')
+    txt_file.write("Total Votes: " + str(total_votes))
+    for i in range(len(candidate)):
+        txt_file.write(f"{candidate[i]}: {str(Percent_votes[i])} ({str(vote_count[i])})" +"\n")
+        txt_file.write('"Winner:", (winning_candidate))')
